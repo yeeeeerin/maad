@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Project{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/Project_create.css" %}{% endblock %}
+
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	
+
+<div id ='content'>
+	<form id="searchbox" action="{% url 'Project:search' %}" method="post"> {% csrf_token %}
+		<input id = "id_search_word" type="text" maxlength="100" required="True" name="search_word", value = "" OnKeyUp="myFunction()" />
+			<input id="submit" type="image" name="find"/>
+	</form>
+
+	<div name = 'sametype' id = 'sametype'>
+		<input name = 'b' id='b' type="text" maxlength='100' />
+	</div>
+	
+	<div id ='recent_tag'>
+		<table>
+			<tr>
+		{% for URL in Pro_all %}	
+				<th class='tag'>{{URL.tag}}</th>
+		{% endfor %}
+			</tr>
+		</table>
+	</div>
+
+
+	<div id = 'new_project'>
+		<div id='title'>
+			<h1>시작하세요</h1>
+			<h1>당신의 프로젝트를</h1>
+		</div>
+		{% if message %}<div class="alert alert-info">{{ message }}{{ errors }}</div>{% endif %}
+	
+		<form method="POST" action="/Project/DoWriteBoard/" class="form-horizontal">
+
+			{% csrf_token %}
+
+			<div class="form-group">
+
+				<div class="col-lg-10">
+					<input class="form-control" type="text" name="name" id="name" placeholder="신규 프로젝트 명을 입력하세요">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-2">
+					<img id="cre_pro" type=submit value="등록" name="cre_pro" src="{% static "photo/+.png" %}">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+$(function() {
+    $("#id_search_word").autocomplete({
+      source: "/Project/search/autocomplete",
+   
+      minLength: 1,
+    });
+  });
+
+function writeCheck() {
+			var form = document.writeform;
+
+				if (!form.title.value)
+				{
+					alert("이름을 적어주세요");
+					form.title.focus();
+					return;
+				}
+				if (!form.link.value) {
+					alert("제목을 적어주세요");
+					form.link.focus();
+					return;
+				}
+				if (!form.tag.value) {
+					alert("내용을 적어주세요");
+					form.tag.focus();
+					return;
+				}
+			form.submit();
+			}
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+function myFunction() {
+    document.getElementById("sametype").style.display='block';
+    document.getElementById("id_search_word").style.backgroundImage='none';
+    document.getElementById("recent_tag").style.display='none';
+    var x = document.getElementById("id_search_word").value;
+    document.getElementById("b").value = x;
+	
+	if(document.getElementById("b").value == ""){
+	    document.getElementById("sametype").style.display='none';
+	    document.getElementById("id_search_word").style.backgroundImage='url(http://127.0.0.1:8000/static/photo/search_back.png)';
+	    document.getElementById("recent_tag").style.display='block';
+		}
+}
+
+function myFunction2() {
+    document.getElementById("sametype").style.display='none';
+    document.getElementById("recent_tag").style.display='block';
+}
+
+</script>
+{% endblock %}

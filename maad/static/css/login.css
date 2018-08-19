@@ -1,0 +1,188 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css'); 
+
+#box{
+	width: 1200px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 100;
+	font-family: "NanumSquare", sans-serif;
+}
+
+#content{
+	position: relative;
+	top: 215px;
+	width: 500px;
+	margin: 0 auto;
+	height: 350px;
+	border: silver;
+	box-shadow: 6px 7px 30px 2px silver;
+}
+
+.aligned{
+	border-style: none;
+}
+
+.form-row{
+	position: relative;
+	top: 55px;
+	left: 50px;
+	margin-bottom: 50px;
+}
+
+#id_username{
+	font-size: 45px;
+	width: 380px;
+	color: #7f7f7f;
+	border-style: none;
+}
+
+#id_password{
+	font-size: 45px;
+	width: 380px;
+	color: #7f7f7f;
+	border-style: none;
+}
+
+#find{
+	position: relative;
+	top: 68px;
+	left: 50px;
+	font-size: 12pt;
+	text-decoration: none;
+	color: #666666;
+}
+
+.register{
+	position: relative;
+	top: 70px;
+	left: 175px;
+	font-size: 14pt;
+	text-decoration: none;
+	color: #666666;
+}
+
+#login{
+	position: relative;
+	top: 42px;
+	left: 375px;
+	background-color: white;
+	border-style: none;
+	color: #666666;
+	font-size: 14pt;
+}
+
+#id_username::-webkit-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f; font-weight:200;}
+#id_username::-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+#id_username:-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+#id_username:-ms-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+
+#id_password::-webkit-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f; font-weight:200;}
+#id_password::-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+#id_password:-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+#id_password:-ms-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+
+
+.m{
+	display:none;
+	position:fixed;
+	right:0;
+	top:0;
+	width:400px;
+	height:100%;
+	background: black;
+	opacity: 0.9;
+}
+
+.m span{
+	position: absolute;
+	color: white;
+	right:30px;
+	top:30px;
+	cursor: pointer;
+	font-size: 15pt;
+}
+
+#reg_title{
+	color: #b2b2b2;
+	text-align: center;
+	top: 65px;
+	position: relative;
+	font-size: 22pt;
+	font-weight: 200;
+}
+
+#reg_form{
+	position: relative;
+	top: 100px;
+	left: 75px;
+}
+
+.form-control{
+	width: 250px;
+	margin-bottom: 65px;
+	font-size: 14pt;
+	background-color: black;
+	border-style: none;
+	padding-bottom: 5px;
+	border-bottom-style: solid;
+	border-bottom-color: #717171;
+	border-bottom-width: 1px;
+	color: wheat;
+}
+
+#privacy{
+	color: #b2b2b2;
+	font-size: 14pt;
+	width: 215px;
+	position: relative;
+	top: -10px;
+	font-weight: 200;
+}
+
+.check{
+	position: relative;
+	top: -52px;
+	left: 220px;
+	width: 22px;
+}
+
+#register{
+	color: #b2b2b2;
+	font-size: 13pt;
+	position: relative;
+	left: 160px;
+	top: 14px;
+	border-style: none;
+	font-weight: 300;
+	border-bottom-style: solid;
+	border-bottom-color: #b2b2b2;
+	border-bottom-width: 1px;
+	padding-bottom: 6px;
+	background-color: black;
+
+}
+
+#id_email::-webkit-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2; font-weight:200;}
+#id_email::-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_email:-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_email:-ms-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+
+#id_name::-webkit-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2; font-weight:200;}
+#id_name::-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_name:-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_name:-ms-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+
+#id_password1::-webkit-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2; font-weight:200;}
+#id_password1::-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_password1:-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_password1:-ms-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+
+#id_password2::-webkit-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2; font-weight:200;}
+#id_password2::-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_password2:-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_password2:-ms-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+
+#id_phone_number::-webkit-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2; font-weight:200;}
+#id_phone_number::-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_phone_number:-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}
+#id_phone_number:-ms-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:14pt; color:#b2b2b2;font-weight:200;}

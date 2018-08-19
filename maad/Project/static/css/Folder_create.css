@@ -1,0 +1,54 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css'); 
+
+
+#content{
+	position: relative;
+	top: 30px;
+	width: 700px;
+	margin: 0 auto;
+	height: 750px;
+	font-family: "NanumSquare", sans-serif;
+}
+
+#folder_cre{
+	position: relative;
+	top: 90px;
+	left: 30px;
+	width: 600px;
+	height: 350px;
+	box-shadow: 5px 5px 30px 5px silver;
+}
+
+.folder_title{
+	font-size: 35px;
+	font-weight: 300;
+	position: relative;
+	top: 50px;
+	left: 40px;
+}
+
+.id_title{
+	position: relative;
+	top: 100px;
+	left: 42px;
+	font-size: 30px;
+	border: none;
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+	width:506px;
+	font-family:"NanumSquare", sans-serif;
+	font-weight: 200;
+}
+
+#cre_fol{
+	position: absolute;
+	top: 57px;
+	right: 50px;
+	width: 110px;
+}
+
+
+#id_title::-webkit-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f; font-weight:200;}
+#id_title::-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+#id_title:-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+#id_title:-ms-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}

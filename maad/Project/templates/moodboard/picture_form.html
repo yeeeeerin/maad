@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block title %}Upload pictures{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/dropzone.css" %}{% endblock %}
+
+{% block content %}
+
+<div id ='content'>
+	<form id="searchbox" action="{% url 'Project:search' %}" method="post"> {% csrf_token %}
+		<input id = "id_search_word" type="text" maxlength="100" required="True" name="search_word", value = "" OnKeyUp="myFunction()" />
+			<input id="submit" type="image" name="find"/>
+	</form>
+
+	<div name = 'sametype' id = 'sametype'>
+		<input name = 'b' id='b' type="text" maxlength='100' />
+	</div>
+	
+	<div id ='recent_tag'>
+		<table>
+			<tr>
+		{% for URL in tag %}	
+				<th class='rec_tag'>{{URL.tag}}</th>
+		{% endfor %}
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div id='box'>
+
+	<div id="function">
+		<a class="function_name" href="{% url 'Project:create_text' Pro_view.name Folder_view.title %}">Memo</a>
+		<a class="function_name" href="{% url 'Project:create_pic' Pro_view.user.id Pro_view.name Folder_view.title %}">Image</a>
+		<a class="function_name" href="{% url 'Project:create_url' Pro_view.user.id Pro_view.name Folder_view.title %}">Bookmark</a>
+	</div>	
+
+	<form name="dropzone"  class="dropzone" id = "my-awesome-dropzone" action="." method="post" enctype="multipart/form-data">
+		<div class="dz-default dz-message" id="dropzone_title"><p>드래그하세요</p><p>당신의 이미지를</p></div>
+		<img id="img_mood" src="{% static "photo/moodboard.png" %}"/>
+		{% csrf_token %}
+		<div class="fallback">
+			<input id="file" type="file" multiple />
+		</div>
+		<div id="aaa">
+			<select id="id_folder" name="folder" style="display:none">
+					<option value="{{Folder_view.id}}" selected="selected"></option>
+			</select>
+		</div>
+		<button  name = "img_save" id ="img_save" class ="img_save" >save</button>
+	</form>			
+
+	<div id="folder_list">
+			<img id="folder" src="{% static "photo/folder.png" %}"/>
+		{% for fol_list in Folder_all %}
+			<a class="folder_name" href="{% url 'Project:create_pic' Pro_view.user.id Pro_view.name fol_list.title %}">{{fol_list.title}}</a>
+		{% endfor %}
+			<a id="folder_update" href="">수정</a>
+	</div>
+
+	<div class = "preview" , id= "preview">
+		
+	</div>
+
+	<div id="container">
+	{% for img in pic %}
+		<div class="hey">
+			<form class='form_del' method = "POST" action ="{% url 'Project:delete' Pro_view.name Folder_view.title img.id  %}">{% csrf_token %}
+				<img class ="delete" src="{% static "photo/delete.png" %}" type="submit"/>
+			</form>
+			<img class ="image" id ={{img.id}} src="{{img.file.url}}" alt="{{img.file.name}}" heigth = "200" width = "200" onclick="update_img()" />
+			<div id="tag">
+				{% load tagging_tags %}
+				{% tags_for_object img as tags %}
+				{% for tagg in tags %}
+					<p class="tag">{{tagg}} </p>
+				{% endfor %}
+			</div>
+
+			<div id='picture_story'>
+			{% if img.title %}
+				<p id='picture_detail'><b>{{img.title}} </b>{{img.detail}}</p>
+			{% else %}
+				<p id='picture_detail'>제목과 설명을 적어주세요!</p>
+			{% endif %}
+			</div>
+			<img class ="change" src="{% static "photo/update.png" %}" value = "{{img.id}}" id ="{{img.id}}" name = "change"/>
+		</div> 		
+
+		{% endfor %}
+</div>
+</div>
+
+<div id = "slideshow"> 
+	<img id="update_img"  src= "" heigth ="150" width="200"/>
+	<form name= "image-detail" id = "image-detail" method = "POST" action = ""/>{% csrf_token %}
+		<label id='img_title' for="id_title">이미지 제목</label>
+		<input id="id_title" maxlength="10" name="title" type="text">
+
+		<label id ='img_detail' for="id_detail">이미지 설명</label>
+		<textarea cols="40" id="id_detail" maxlength="30" name="detail" rows="5"></textarea>
+
+		<label id ='img_tag' for="id_tag">#태그(선택)</label>
+		<input id="id_tag" maxlength="255" name="tag" type="text">
+
+		<button  name = "save" class ="save" id="save" >저장</button>
+		<img id="slide_x"  src= "{% static "photo/x.png" %}" class="close"/>
+
+		<div id=border_save>
+
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">	
+$(function() {
+    $("#id_search_word").autocomplete({
+      source: "/Project/search/autocomplete",
+      minLength: 1,
+    });
+  });
+</script>
+
+<script type="text/javascript" src="{% static "js/vendor/dropzone.js" %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js" type ="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript"> 
+
+Dropzone.autoDiscover = false;
+
+var myDropzone = new Dropzone("#my-awesome-dropzone", { url: "{% url 'Project:create_pic' Pro_view.user.id Pro_view.name Folder_view.title %}",
+							previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"item\">\n   <img  data-dz-thumbnail />\n <a class=\"dz-remove\" href=\"javascript:undefined;\" data-dz-remove> x </a> </div>\n  <div class=\"dz-progress\"><span class=\"dz-upload\" data-dz-uploadprogress></span></div>\n  \n",
+							previewsContainer: "#preview",
+     	 						maxFilesize: 1024,
+							maxFiles: 100,
+							params:"file",
+							addRemoveLinks: false,		
+});
+
+var id;
+
+$('.change').click(function(e){
+	jQuery("#slideshow").animate({right:0}, 300);
+	id = jQuery(this).attr('id');
+	$('.save').show();
+	document.getElementById('save').setAttribute('value', id);	
+});
+
+$('.close').click(function(e){
+	e.preventDefault();
+	jQuery("#slideshow").animate({right: '-400px'}, 300);
+	$('#image-detail').each(function(){
+		this.reset();
+	});
+
+});
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+function myFunction() {
+    document.getElementById("sametype").style.display='block';
+    document.getElementById("id_search_word").style.backgroundImage='none';
+    document.getElementById("recent_tag").style.display='none';
+    var x = document.getElementById("id_search_word").value;
+    document.getElementById("b").value = x;
+	
+	if(document.getElementById("b").value == ""){
+	    document.getElementById("sametype").style.display='none';
+	    document.getElementById("id_search_word").style.backgroundImage='url(http://127.0.0.1:8000/static/photo/search_back.png)';
+	    document.getElementById("recent_tag").style.display='block';
+		}
+}
+
+function myFunction2() {
+    document.getElementById("sametype").style.display='none';
+    document.getElementById("recent_tag").style.display='block';
+}
+
+
+var container = document.querySelector('#container');
+var msnry = new Masonry(container, {
+	columnWidth: 200,
+	itemSelector: '.hey',
+
+ });
+</script>
+
+{% endblock %}
+
+

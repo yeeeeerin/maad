@@ -1,0 +1,140 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css'); 
+
+
+#content{
+	position: relative;
+	top: 30px;
+	width: 700px;
+	margin: 0 auto;
+	height: 750px;
+	font-family: "NanumSquare", sans-serif;
+}
+
+#id_search_word{
+	width: 700px;
+	height: 100px;
+	border: none;
+	background-image:url(../photo/search_back.png);
+	background-repeat: no-repeat;
+	background-position-x: 300px;
+	font-size: 90px;
+	font-weight: 200;
+	text-align: center;
+	font-family: "NanumSquare";
+	text-decoration-line: underline;
+	text-underline-position: under;
+}
+
+#submit{
+	display: none;
+}
+
+#sametype{
+	display: none;
+	position: absolute;
+	width: 700px;
+	background-color: white;
+	height: 90px;
+	box-shadow: 6px 11px 27px -5px silver;
+	top: 135px;
+	border: solid;
+	border-color: silver;
+	border-width: thin;
+	z-index: 100;
+}
+
+#new_project{
+	position: relative;
+	top: 80px;
+	left: 30px;
+	border: silver;
+	box-shadow: 6px 7px 30px 2px silver;
+	width: 600px;
+	height: 350px;
+}
+
+#b{
+	position: relative;
+	top: 20px;
+	left: 30px;
+	border: none;
+	font-size: 40px;
+	font-family: "NanumSquare";
+	font-weight: 200;
+	width: 640px;
+	box-shadow: 0px 0px 25px -2px silver;
+}
+
+.tag{
+	box-shadow: 6px 7px 30px 2px silver;
+	padding: 5px 10px 5px 10px;
+	border-radius: 25px;
+	margin-right: 30px;
+	float: left;
+	margin-top: 10px;
+}
+
+#title{
+	position: relative;
+	left: 50px;
+	top: 40px;
+	font-size: 20px;
+}
+
+h1{
+	font-weight: 200;	
+	line-height: 1;
+}
+
+#name{
+	position: relative;
+	top: 125px;
+	left: 50px;
+	border: none;
+	border-bottom-style: solid;
+	border-bottom-color: #b2b2b2;
+	border-bottom-width: 2px;
+	width: 506px;
+	font-size: 30px;
+}
+
+#cre_pro{
+	position: absolute;
+	top: 40px;
+	left: 445px;
+	width: 113px;
+}
+
+#ui-id-1{
+	list-style-type: none;
+	position: relative;
+}
+
+.ui-menu-item{
+	position: relative;
+	left: -40px;
+	top: 119px;
+	width: 668px;
+	height: 45px;
+	font-size: 30px;
+	background-color: white;
+	font-family: "NanumSquare";
+	font-weight: 200;
+	padding-left: 32px;
+	z-index: 100;
+	box-shadow: 3px 5px 13px -3px silver;
+	border: solid;
+	border-color: silver;
+	border-width: thin;
+	border-top-style: none;
+	border-bottom-style: none;
+}
+
+.ui-helper-hidden-accessible{
+	display: none;
+}
+
+#name::-webkit-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f; font-weight:200;}
+#name::-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+#name:-moz-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}
+#name:-ms-input-placeholder{font-family: "NanumSquare", sans-serif; font-size:20pt; color:#7f7f7f;font-weight:200;}

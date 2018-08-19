@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NT23TLP');</script>
+
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+ fbq('init', '107650933292072'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1" 
+src="https://www.facebook.com/tr?id=107650933292072&ev=PageView
+&noscript=1"/>
+</noscript>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>디자이너를 위한 간편 파일 관리 솔루션</title>
+	<meta name="author" content="Agzak company" />
+	<meta name="description" content="당신의 소중한 디자인 작업물 결과뿐만 아니라 과정까지 기록하세요." />
+	<meta name="keywords"  content="potfolio,design,desinger,file,포트폴리오,파일관리,디자이너,디자인,포트폴리오 자료정리,자료정리,자료,폴더분류,무드보드,moodboard,파일검색," />
+	<meta name="Resource-type" content="Document" />
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+	<!-- 페이스북 -->
+	<meta property="og:title" content="다시는 없을 무료 체험 기회를 놓치지 마세요!"/>
+	<meta property="og:url" content="http://themaad.com"/>
+	<meta property="og:description" content="가장 쉽고 빠른 파일 관리 솔루션"/>	
+
+	{% load static %}
+	<meta property="og:image" content="http://themaad.com/static/photo/preview.png" />
+
+	<link rel="icon" href="{% static "photo/Maad.ico" %}">
+	<link href="{% static "css/examples.css" %}" rel="stylesheet" type="text/css" />
+	<link href="{% static "css/jquery.fullPage.css" %}" rel="stylesheet" type="text/css" />
+	<link href="{% static "css/landing.css" %}" rel="stylesheet" type="text/css" media="screen and (min-width:640px)">
+	<link href="{% static "css/mobile.css" %}" rel="stylesheet" type="text/css" media="screen and (max-width:639px)">
+	<style>
+
+	/* Style for our header texts
+	* --------------------------------------- */
+	
+	.fp-slidesNav.bottom{
+		top:7%;	
+	}
+	</style>
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="{% static "js/scrolloverflow.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/examples.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/jquery.fullPage.js" %}"></script>
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+		
+			$('#fullpage').fullpage({
+				anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage','5thPage','6thPage'],
+				sectionsColor: ['#4A6FB1', '#f7f7f7', '#f7f7f7','#ffffff','#f7f7f7','#ffffff'],
+				scrollOverflow: true,		
+			});
+		});
+
+	</script>
+
+      
+     <script type="text/javascript" >
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104078572-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NT23TLP"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+<div id="fullpage">
+	<div class="section " id="section0">
+		<div class="intro">
+			<div id="img_logo">
+				<img id="logo" src="{% static "photo/logo.png" %}">
+			</div>
+			<div id ="section_title">
+				<p class="section_word"  style="width:90%;">내 소중한 디자인 작업물,</p>		
+				<p class="section_word">결과뿐만 아니라 <B id="section_word0"> 과정</B>까지 기록하세요.</p>
+			</div>
+			<div id ="ex_button">
+				{% if Pro_all %}
+				<a href="{% url 'Project:index' user_name.name %}" onclick="ga('send', 'event', 'button','click')" id="ex_but">바로 시작하기</a>
+				{% else %}
+				<a href="{% url 'Project:create_pro' %}" onclick="ga('send', 'event', 'button','click')" id="ex_but">바로 시작하기</a>	
+				{% endif %}
+			</div>
+		</div>				
+	</div>
+
+
+	<div class="section" id="section1">
+			<div class="intro">
+				<div id="section1_title">
+					<p class="section1_word"><B id="section_word0">포트폴리오</B> 제작 시 가장 중요한 자료관리,</p>
+					<p class="section1_word" id=section1_title1">어떻게 하고 계신가요?</p>
+				</div>
+
+				<div id="vert_line">
+					<hr id="line" width="28%" size="3%" color="black" align="left">
+				</div>
+				
+				<div id="hori_line">
+					<img id="img_hori" src="{% static "photo/hori.png" %}">
+				</div>
+				<div id="img_prof">
+					<img id="prof" src="{% static "photo/yerin.png" %}">
+					<p id="prof_name"><B id="section_word0">이예린 / 대학생</B></p>
+					<p class="prof_text">좋은 참고 이미지, URL을 수집해 놓아도 워낙 자료가 방대하다 보니 원하는 자료를 바로바로 찾지 못하는 경우가 많아요. 필요한 자료를 <B id="section_word0">쉽게 검색</B>해서 활용할 수 있었으면 좋겠어요.</p>
+				</div>
+	
+				<div id="img_prof">
+					<img id="prof" src="{% static "photo/yena.png" %}">
+					<p id="prof_name"><B id="section_word0">오예나 / 취업 준비생</B></p>
+					<p class="prof_text" id="yena_text">최근 기업에서는 단순히 결과물만 담긴 포트폴리오보다 결과물을 만들어 내기까지의 의도와 과정이 담긴 포트폴리오를 선호한다고 해요. 기업에 어필할 수 있도록 <B id="section_word0">과정이 담긴</B> 포트폴리오를 제작하고 싶어요.</p>
+				</div>
+
+				<div id="img_prof">
+					<img id="prof" src="{% static "photo/minhee.png" %}">
+					<p id="prof_name"><B id="section_word0">오민희 / 프리랜서 디자이너</B></p>
+					<p class="prof_text" id="minhee_text">작업을 하다 보면 내가 왜 이 작업을 했지? 이 자료를 왜 수집해 놓은 거지?하는 의문이 드는 경우가 있어요. <B id="section_word0">작업 순서별</B>로 자료를 저장하고 <B id="section_word0">간단한 메모</B>를 남길 수 있으면 포트폴리오를 만들 때 편리할 것 같아요!</p>
+				</div>
+
+				<div id="second_back">
+					<img id="sec_back" src="{% static "photo/second_back.png" %}">
+				</div>
+				
+				<div id="laptop">
+					<img id="img_laptop" src="{% static "photo/laptop.png" %}">
+				</div>
+
+				<div id="section1_title2">
+					<p>이젠 MAAD로</p>
+					<p id="section1_title21">작업물을 간편하게 관리하고</p>
+					<p><B id="section_word0">차별화된 포트폴리오</B>를 만들어보세요!</p>
+				</div>
+
+				<div id="test_button">
+					<a href="https://goo.gl/forms/lWRBi5BUScVZNMLe2" onclick="ga('send', 'event', 'button','click')" id="test_but">바로 시작하기</a>
+				</div>
+		</div>		
+	</div>
+	<div class="section" id="section2">
+		<div class="intro">
+			<div id="section2_title">
+				<p><B id="section_word0">MAAD</B>가 이렇게 편합니다!</p>
+			</div>		
+
+			<div id="maad_info">			
+				<img id="img_maad_info" src="{% static "photo/upload.png" %}">
+				<img id="img_maad_mob" src="{% static "photo/upload_mob.png" %}">
+			</div>
+			<div id="maad_info">
+				<img id="img_maad_info" src="{% static "photo/arrange.png" %}">
+				<img id="img_maad_mob" src="{% static "photo/arrange_mob.png" %}">
+			</div>
+			<div id="maad_info">
+				<img id="img_maad_info" src="{% static "photo/search.png" %}">
+				<img id="img_maad_mob" src="{% static "photo/search_mob.png" %}">
+			</div>
+
+			<div id="more_button" class="visible-md visible-lg">
+				  <a href = "javascript:void(0)" id="more_but">바로 시작하기</a>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="section" id="section3">
+		<div class="intro" id="intro_way">
+			<div id="section3_title">
+				<p>MAAD 이용방법</p>
+			</div>
+			<div class="maad_way" id="way_free">
+				<img id="img_maad_way" src="{% static "photo/free.png" %}">
+				<p class="way_name" id="free">프로젝트 생성</p>
+				<hr id="way_line" width="12%" size="3%" color="black" align="left">
+				<p class="way_text" id="free_text">무료 파일관리 공간을 제공받으세요.</p>
+			</div>
+			<div class="maad_way" id="way_sort">
+				<img id="img_maad_way" src="{% static "photo/sort.png" %}">
+				<p class="way_name" id="sort">단계별 폴더분류</p>
+				<hr id="way_line" width="12%" size="3%" color="black" align="left">
+				<p class="way_text">작업 순서 등 자신의 입맛에 맞게 폴더를 분류하세요.</p>
+			</div>
+			<div class="maad_way" id="way_save">
+				<img id="img_maad_way" src="{% static "photo/save.png" %}">
+				<p class="way_name" id="save">자료저장</p>
+				<hr id="way_line" width="12%" size="3%" color="black" align="left">
+				<p class="way_text" id="save_text">폴더에 이미지를 드래그해서 저장하세요. URL도 간단하게 저장이 가능합니다.</p>
+			</div>
+			<div class="maad_way" id="way_data">
+				<img id="img_maad_way" src="{% static "photo/data.png" %}">
+				<p class="way_name" id="data">자료 검색</p>
+				<hr id="way_line" width="12%" size="3%" color="black" align="left">
+				<p class="way_text">저장한 자료에 해시태그를 남겨 어떤 파일인지 기록하고 자료를 빠르게 검색하세요.</p>
+			</div>
+			<div id="blank">
+			</div>
+		</div>
+	</div>
+	<div class="section" id="section4">
+		<div class="intro">
+			<div id="section4_title">
+				<p>MAAD를 만드는 사람들</p>
+			</div>
+			<div id="maad_people">
+				<img id="img_maad_people" src="{% static "photo/people.png" %}">
+				<img id="img_maad_people_mob" src="{% static "photo/people_mob.png" %}">
+			</div>
+
+			<div id="section4_title2">
+				<p>협력사</p>
+			</div>
+			<div id="maad_co">
+				<img id="img_maad_co" src="{% static "photo/co.png" %}">
+				<img id="img_maad_co_mob" src="{% static "photo/co_mob.png" %}">				
+			</div>
+			<div id ="ex_button2">
+				<a href="https://goo.gl/forms/lWRBi5BUScVZNMLe2" onclick="ga('send', 'event', 'button','click')" id="ex_but2">바로 시작하기</a>
+			</div>
+
+			<div id="info">
+				<div id="info_logo">
+					<img id="logo_info" src="{% static "photo/logo.png" %}">
+				</div>
+				<div id="location">
+					<img id="img_loca" src="{% static "photo/location.png" %}">
+					<p class="info_text">서울시 노원구 공릉1동</p>
+				</div>
+				<div id="phone">
+					<img id="img_phone" src="{% static "photo/phone.png" %}">
+					<p class="info_text">010-3019-7706</p>
+				</div>
+				<div id="fax">
+					<img id="img_fax" src="{% static "photo/fax.png" %}">
+					<p class="info_text">themaadofficial@gmail.com</p>
+				</div>
+				<div id="sns">
+					<a href="https://www.facebook.com/themaad/"><img id="facebook" src="{% static "photo/facebook.png" %}"></a>
+					<a href="https://www.instagram.com/maad_official/"><img id="instargram" src="{% static "photo/instargram.png" %}"></a>
+				</div>
+			</div>
+
+			<div id="copy">
+				<p id="copyright">Copyright 2017. Agzak Company. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+
+</html>
+
+

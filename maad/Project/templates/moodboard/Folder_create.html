@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+
+{% block title %}Folder{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/Folder_create.css" %}{% endblock %}
+
+{% block content %}
+
+<div id='content'>
+	<div id='folder_cre'>
+		<p class='folder_title'>새 프로젝트를 만드셨군요!</p>
+		<p class='folder_title'>첫 폴더를 만들어 주세요!</p>
+
+		{% if form.is_multipart %}
+			<form enctype="multipart/form-data" method="post" action="{% url 'Project:create_pic' project.name %}">{% csrf_token %}
+		{% else %}
+			<form method="post" action=".">{% csrf_token %}
+		{% endif %}
+				<input class="id_title" maxlength="20" name="title" type="text" placeholder="신규 폴더명을 입력하세요"> 
+
+				<div id="aaa" style="display:none">
+					<select id="id_proj" name="proj" sytle="display:none">
+						<option value="{{project.id}}" selected="selected"></option>
+					</select>
+				</div>
+				<img id="cre_fol" type="submit" name="cre_fol" src="{% static "photo/+.png" %}">
+			</form>
+	</div>
+</div>
+
+{% endblock %}

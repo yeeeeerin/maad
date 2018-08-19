@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}login{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/login.css" %}{% endblock %}
+
+{% block content %}
+
+<div id="box">
+	<div id="content">
+
+	<form name="login" action="." method="post">{% csrf_token %}
+		{% if form.errors %}
+		<p >id나 비밀번호가 일치하지 않아요.</p>
+		{% endif %}
+
+		<fieldset class="aligned">
+			<div class="form-row">
+				<input id="id_username" maxlength="254" name="username" type="text" placeholder="maad@example.com">
+			</div>
+		    
+			<div class="form-row">
+				<input id="id_password" name="password" type="password" placeholder="password">
+			</div>
+		</fieldset>
+
+		<div>
+			<a id="find" href="{% url 'password_reset' %}">비밀번호 찾기</a>
+			<a class="register" href="{% url 'register' %}">가입하기</a>
+		</div>
+		
+		<div >
+			<input id="login" type="submit" value="로그인하기"/>
+			<!-- input type="hidden" name="next" value="/" -->
+			<input type="hidden" name="next" value="{{ next }}" />
+		</div>
+	</form>  
+		
+		
+
+	</div>
+
+</div>
+
+
+{% endblock %}

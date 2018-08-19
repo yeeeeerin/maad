@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Text{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/text_create.css" %}{% endblock %}
+
+{% block content %}
+
+<div id ='content'>
+	<form id="searchbox" action="{% url 'Project:search' %}" method="post"> {% csrf_token %}
+		<input id = "id_search_word" type="text" maxlength="100" required="True" name="search_word", value = "" OnKeyUp="myFunction()" />
+			<input id="submit" type="image" name="find"/>
+	</form>
+
+	<div name = 'sametype' id = 'sametype'>
+		<input name = 'b' id='b' type="text" maxlength='100' />
+	</div>
+	
+	<div id ='recent_tag'>
+		<table>
+			<tr>
+		{% for URL in tag %}	
+				<th class='rec_tag'>{{URL.tag}}</th>
+		{% endfor %}
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div id='box'>
+	<div id="function">
+		<a class="function_name" href="{% url 'Project:create_text' Pro_view.name Folder_view.title %}">Memo</a>
+		<a class="function_name" href="{% url 'Project:create_pic' Pro_view.name Folder_view.title %}">Image</a>
+		<a class="function_name" href="{% url 'Project:create_url' Pro_view.name Folder_view.title %}">Bookmark</a>
+	</div>	
+
+	<div id='text_area'>
+		<form action="." method="post" > {% csrf_token %}
+
+			<textarea cols="40" id="id_text" name="text" rows="10" placeholder="메모하세요&#13;&#10;당신의 생각을"></textarea>
+			
+			<div id="aaa">
+				<select id="id_folder" name="folder" style="display:none">
+						<option value="{{Folder_id.id}}" selected="selected"></option>
+				</select>
+			</div>			
+			<input name='text_save' id='folder_save' type="submit" value="저장하기" />
+		</form>
+		<div id='border_line'>
+
+		</div>
+	</div>
+	
+</div>
+{% endblock %}
+
+

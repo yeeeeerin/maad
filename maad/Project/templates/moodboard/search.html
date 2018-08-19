@@ -1,0 +1,94 @@
+
+
+
+
+<head>
+
+
+</head>
+
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<form id="searchbox" action="{% url 'Project:search' %}" method="post"> {% csrf_token %}
+		
+				<input id = "id_search_word" type="text" placeholder="  Enter hashtag" maxlength="100" required="True" name="search_word", value = ""/>
+			<input id="submit" type="image" name="find"/>
+		</form>
+
+
+
+<div id="wrap">
+		<div id="box">
+			<div id=section>
+				<div id="title"><h1 id="title_latest">'{{search_term}}' Search Result<h1></div>
+
+					<div id="content">
+			
+						<table id="board" cellspacing="1" width="780">
+						<tbody>
+	
+						{% for rs in tag %}
+								<tr>
+									<td class=bulletin> {{rs.title}} {{rs.name}}</td>
+									<td class=tag>{{rs.tag}}</td>
+									
+								</tr>
+						{% endfor %}
+
+						</tbody>
+						</table>
+					</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script type="text/javascript">
+
+$(function() {
+    $("#id_search_word").autocomplete({
+      source: "/Project/search/autocomplete",
+   
+      minLength: 1,
+    });
+  });
+
+ 
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+
+</script>

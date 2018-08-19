@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}register success{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/register_done.css" %}{% endblock %}
+
+{% block content %}
+<div id="content">
+
+    <h1>Registration Completed Successfully</h1>
+
+    <p>Thank you for registering.</p>
+
+    <a id='login' href="{% url 'login_url' %}">Log in again</a>
+
+</div>
+{% endblock %}

@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+{% block title %}Upload URL{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/Url_create.css" %}{% endblock %}
+
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<div id ='content'>
+	<form id="searchbox" action="{% url 'Project:search' %}" method="post"> {% csrf_token %}
+		<input id = "id_search_word" type="text" maxlength="100" required="True" name="search_word", value = "" OnKeyUp="myFunction()" />
+			<input id="submit" type="image" name="find"/>
+	</form>
+
+	<div name = 'sametype' id = 'sametype'>
+		<input name = 'b' id='b' type="text" maxlength='100' />
+	</div>
+	
+	<div id ='recent_tag'>
+		<table>
+			<tr>
+		{% for URL in tag %}	
+				<th class='rec_tag'>{{URL.tag}}</th>
+		{% endfor %}
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div id = 'box'>
+	<div id = 'new_url'>
+		<div id="function">
+			<a class="function_name" href="{% url 'Project:create_text' Pro_view.name Folder_view.title %}">Memo</a>
+			<a class="function_name" href="{% url 'Project:create_pic' Pro_view.user.id Pro_view.name Folder_view.title %}">Image</a>
+			<a class="function_name" href="{% url 'Project:create_url' Pro_view.user.id Pro_view.name Folder_view.title %}">Bookmark</a>
+		</div>	
+		<div id='url_title'>
+			<h1>입력하세요</h1>
+			<h1>당신의 URL을</h1>
+		</div>
+		{% if message %}<div class="alert alert-info">{{ message }}{{ errors }}</div>{% endif %}
+	
+		<form method="POST" action="." class="form-horizontal">
+			{% csrf_token %}
+			<div id="aaa">
+				<select id="id_folder" name="folder" style="display:none">
+						<option value="{{Folder_view.id}}" selected="selected"></option>
+				</select>
+			</div>
+			<div class="form-group">
+
+				<div class="col-lg-10">
+					<input class="form-control" type="text" name="title" id="title" placeholder="URL의 제목을 입력해주세요.">
+					<input class="form-control" type="text" name="link" id="link" placeholder="URL 웹사이트, 이미지 링크를 넣으세요.">
+					<input class="form-control" type="text" name="tag" id="tag" placeholder="#태그 (선택)">		
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-2">
+					<button id='cre_url' name='cre_url' type="submit">저장 ></button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div id="folder_list">
+			<img id="folder" src="{% static "photo/folder.png" %}"/>
+		{% for fol_list in Folder_all %}
+			<a class="folder_name" href="{% url 'Project:create_pic' Pro_view.user.id Pro_view.name fol_list.title %}">{{fol_list.title}}</a>
+		{% endfor %}
+			<a id="folder_update" href="">수정</a>
+	</div>
+
+	{% for img in url %}
+		<div class="hey">
+			<form class='form_del' method = "POST" action ="{% url 'Project:url_delete' Pro_view.name Folder_view.title img.id  %}">{% csrf_token %}
+				<img class ="delete" src="{% static "photo/delete.png" %}" type="submit"/>
+			</form>
+			<img class ="image" id ={{img.id}} src="{{img.image}}" heigth = "200" width = "200" onclick="update_img()" />
+			<div id="url_tag">
+				{% load tagging_tags %}
+				{% tags_for_object img as tags %}
+				{% for tagg in tags %}
+					<p class="tag">{{tagg}} </p>
+				{% endfor %}
+			</div>
+
+			<div id='picture_story'>
+			{% if img.title %}
+				<p id='picture_detail'><b>{{img.title}} </b></p>
+			{% else %}
+				<p id='picture_detail'>제목을 적어주세요!</p>
+			{% endif %}
+			</div>
+			<img class ="change" src="{% static "photo/update.png" %}" value = "{{img.id}}" id ="{{img.id}}" name = "change"/>
+			<p id='url_link'>{{img.link}}</p>
+		</div> 		
+	{% endfor %}
+
+
+</div>
+
+<div id = "slideshow"> 
+	<img id="update_img"  src= "" heigth ="150" width="200"/>
+	<form name= "image-detail" id = "image-detail" method = "POST" action = ""/>{% csrf_token %}
+		<label id='img_title' for="id_title">URL 제목</label>
+		<input id="id_title" maxlength="10" name="title" type="text">
+
+		<label id ='img_tag' for="id_tag">#태그(선택)</label>
+		<input id="id_tag" maxlength="255" name="tag" type="text">
+
+		<button  name = "save" class ="save" id="save" >저장</button>
+		<img id="slide_x"  src= "{% static "photo/x.png" %}" class="close"/>
+
+		<div id=border_save>
+
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+
+$(function() {
+    $("#id_search_word").autocomplete({
+      source: "/Project/search/autocomplete",
+   
+      minLength: 1,
+    });
+  });
+
+var id;
+
+$('.change').click(function(e){
+	jQuery("#slideshow").animate({right:0}, 300);
+	id = jQuery(this).attr('id');
+	$('.save').show();
+	document.getElementById('save').setAttribute('value', id);	
+});
+
+$('.close').click(function(e){
+	e.preventDefault();
+	jQuery("#slideshow").animate({right: '-400px'}, 300);
+	$('#image-detail').each(function(){
+		this.reset();
+	});
+
+});
+
+function writeCheck() {
+			var form = document.writeform;
+
+				if (!form.title.value)
+				{
+					alert("이름을 적어주세요");
+					form.title.focus();
+					return;
+				}
+				if (!form.link.value) {
+					alert("제목을 적어주세요");
+					form.link.focus();
+					return;
+				}
+				if (!form.tag.value) {
+					alert("내용을 적어주세요");
+					form.tag.focus();
+					return;
+				}
+			form.submit();
+			}
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+function myFunction() {
+    document.getElementById("sametype").style.display='block';
+    document.getElementById("id_search_word").style.backgroundImage='none';
+    document.getElementById("recent_tag").style.display='none';
+    var x = document.getElementById("id_search_word").value;
+    document.getElementById("b").value = x;
+	
+	if(document.getElementById("b").value == ""){
+	    document.getElementById("sametype").style.display='none';
+	    document.getElementById("id_search_word").style.backgroundImage='url(http://127.0.0.1:8000/static/photo/search_back.png)';
+	    document.getElementById("recent_tag").style.display='block';
+		}
+}
+
+function myFunction2() {
+    document.getElementById("sametype").style.display='none';
+    document.getElementById("recent_tag").style.display='block';
+}
+
+</script>
+
+{% endblock %}
+
+
